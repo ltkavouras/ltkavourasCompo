@@ -1,0 +1,33 @@
+#topTable {
+	color:rgb(73,88,60);
+	font-family:'Arbutus';
+	font-size:20px;
+	text-align: center;
+}
+#scoreTable{
+	background-color: white;
+	opacity: .8;
+	text-align:center;
+	color:rgb(73,88,60);
+	font-family:'Arbutus';
+	border:none;
+	width:100%;
+	font-size:20px;
+}
+#scoreTable th {
+	text-align: center;
+	color:rgb(73,88,60);
+	font-family:'Arbutus';
+	font-size: 40px;
+	font-weight: bolder;
+	font-style: italic;
+	border-bottom:4px solid rgb(73,88,60);
+}
+#scoreTable td {
+	padding: .5em .5em;
+}
+#tablecontainer {
+	width: 50%;
+	margin: 0 auto;
+	overflow: scroll;
+}
