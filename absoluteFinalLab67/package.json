@@ -1,0 +1,23 @@
+{
+  "name": "Lab6_and7-SDII",
+  "version": "1.0.0",
+  "description": "",
+  "main": "oregonTrail.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Louis Thomas Kavouras",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "jquery": "^3.2.1",
+    "multer": "^1.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}

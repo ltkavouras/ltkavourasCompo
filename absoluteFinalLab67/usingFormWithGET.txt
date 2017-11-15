@@ -1,0 +1,9 @@
+app.get('/process_get', function(req, res){
+  // Prepares the output into JSON format
+  response = {
+    first_name : req.query.first_name,
+    last_name : req.query.last_name
+  };
+  console.log(response);
+  res.end(JSON.stringify(response));
+});
