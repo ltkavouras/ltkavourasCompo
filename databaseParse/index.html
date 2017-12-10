@@ -1,61 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Node delivered HTML</title>
+
+    <title>Learning Node Server</title>
+    <link rel="stylesheet" href="style.css" />
 
 </head>
+
+
 <body>
-<div class="myForm">
-  <h1>Fill out the forms below</h1>
-  <form action="/data" method="post">
-    <label for="question">Enter the question for the front of the flashcard</label>
-    <input type="text" name="question">
 
-    <label for="answer">Enter the answer to the question above</label>
-    <input type="text" name="answer">
+    <div class="header">
+        <h1>Learning Node and JS</h1>
+        <p>With Ninad</p>
+    </div>
 
-    <button type="submit" value="submit">
-  </form>
-</div>
+    <form action="/data" method="post">
+        <label for="name">Enter your name in the database</label>
+        <input type="text" name="name">
 
-   <div>
-   	<h1>Send JSON to Node</h1>
-        <button onClick="sendJSON()">Send</button>
-        <p id ="result">
-        </p>
-   </div>
-<script>
- var myData = [
-	{
-	    "age": 20,
-      "name": "Bill"
-	},
-	{
-	    "age": 40,
-      "name": "Lisa"
-	},
-	{
-      "age": 80,
-      "name": "Ant"
-	}
-    ]
+        <label for="lastName">Enter your last name in the database</label>
+        <input type="text" name="lastName">
+        <input type="submit" value="submit" />
+        </form>
 
-function sendJSON(){
 
-var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-       document.getElementById("result").innerHTML =
-       this.responseText;
-    }
- };
-xmlhttp.open("POST", "http://localhost:3000");
-xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-xmlhttp.send(JSON.stringify(myData));
+    <div class="container"></div>
 
-}
+    <script type="text/javascript" src="main.js"></script>
 
-</script>
 </body>
 </html>

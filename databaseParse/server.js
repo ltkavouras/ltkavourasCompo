@@ -1,63 +1,35 @@
-var express = require('express');
-var app = express();
-var path = require('path');
+var express    = require('express');
+var app        = express();
+var mysql      = require('mysql');
 var bodyParser = require('body-parser');
-var mysql = require('mysql');
 
-// Configure MySQL connection  (creds below will vary depending on permissions of the database)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static('public'));
+
 var connection = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: '',
-	database: 'flashcard'
-  })
 
-//Establish MySQL connection
-connection.connect(function(err) {
-   if (err)
-      throw err
-   else {
-       console.log('Connected to MySQL');
-       // Start the app when connection is ready
-       app.listen(3000);
-       console.log('Server listening on port 3000');
- }
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  database : 'node'
 });
 
-app.use(bodyParser.json())
-
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/index.html'));
-});
-
-app.post('/', function(req, res) {
-	var jsondata = req.body;
-	var values = [];
-	for(var i=0; i< jsondata.length; i++)
-  	values.push([jsondata[i].age, jsondata[i].name]);
-		//Bulk insert using nested array [ [a,b],[c,d] ] will be flattened to (a,b),(c,d)
-		connection.query('INSERT INTO node_project (age, name) VALUES ?', [values], function(err,result) {
-  		if(err) {
-     		res.send('Error');
-		 		throw err;
-  		}
- 			else {
-     		res.send('Success');
-  		}
-		});
+connection.connect();
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.post('/data', function(req, res){
-	var question = req.body.question;
-	var answer = req.body.answer;
+    var username=req.body.name;
+		var userLastName = req.body.lastName;
+    connection.query("INSERT INTO `names` (name, lastName) VALUES (?)", username.toString(), userLastName.toString(), function(err, result){
+        if(err) throw err;
+            console.log("1 record inserted");
+        });
+    res.send(username + userLastName);
+});
 
-	connection.query('INSERT INTO qanda (question, answer) VALUES ?', [values], function(err,result) {
-		if(err) {
-			res.send('Error');
-			throw err;
-		}
-		else {
-			res.send('Success');
-		}
-	});
+app.listen(3000, function () {
+console.log('Example app listening on port 3000');
 });
