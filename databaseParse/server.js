@@ -10,9 +10,9 @@ var mysql = require('mysql');
 // Configure MySQL connection
 var connection = mysql.createConnection({
 	host: 'localhost',
-	user: 'node',
-	password: 'node',
-	database: 'node_project'
+	user: 'root',
+	password: '',
+	database: 'flashcard'
   })
 
 //Establish MySQL connection
@@ -39,12 +39,13 @@ var jsondata = req.body;
 var values = [];
 
 for(var i=0; i< jsondata.length; i++)
-  values.push([jsondata[i].name,jsondata[i].age]);
+  values.push([jsondata[i].age, jsondata[i].name]);
 
 //Bulk insert using nested array [ [a,b],[c,d] ] will be flattened to (a,b),(c,d)
-connection.query('INSERT INTO members (name, age) VALUES ?', [values], function(err,result) {
+connection.query('INSERT INTO node_project (age, name) VALUES ?', [values], function(err,result) {
   if(err) {
      res.send('Error');
+		 throw err;
   }
  else {
      res.send('Success');
