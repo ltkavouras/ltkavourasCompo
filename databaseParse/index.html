@@ -6,6 +6,19 @@
 
 </head>
 <body>
+<div class="myForm">
+  <h1>Fill out the forms below</h1>
+  <form action="/data" method="post">
+    <label for="question">Enter the question for the front of the flashcard</label>
+    <input type="text" name="question">
+
+    <label for="answer">Enter the answer to the question above</label>
+    <input type="text" name="answer">
+
+    <button type="submit" value="submit">
+  </form>
+</div>
+
    <div>
    	<h1>Send JSON to Node</h1>
         <button onClick="sendJSON()">Send</button>

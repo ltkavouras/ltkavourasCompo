@@ -1,13 +1,10 @@
-
-//Parse data from JSON POST and insert into MYSQL
-
 var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 
-// Configure MySQL connection
+// Configure MySQL connection  (creds below will vary depending on permissions of the database)
 var connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
@@ -34,21 +31,33 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-
-var jsondata = req.body;
-var values = [];
-
-for(var i=0; i< jsondata.length; i++)
-  values.push([jsondata[i].age, jsondata[i].name]);
-
-//Bulk insert using nested array [ [a,b],[c,d] ] will be flattened to (a,b),(c,d)
-connection.query('INSERT INTO node_project (age, name) VALUES ?', [values], function(err,result) {
-  if(err) {
-     res.send('Error');
-		 throw err;
-  }
- else {
-     res.send('Success');
-  }
+	var jsondata = req.body;
+	var values = [];
+	for(var i=0; i< jsondata.length; i++)
+  	values.push([jsondata[i].age, jsondata[i].name]);
+		//Bulk insert using nested array [ [a,b],[c,d] ] will be flattened to (a,b),(c,d)
+		connection.query('INSERT INTO node_project (age, name) VALUES ?', [values], function(err,result) {
+  		if(err) {
+     		res.send('Error');
+		 		throw err;
+  		}
+ 			else {
+     		res.send('Success');
+  		}
+		});
 });
+
+app.post('/data', function(req, res){
+	var question = req.body.question;
+	var answer = req.body.answer;
+
+	connection.query('INSERT INTO qanda (question, answer) VALUES ?', [values], function(err,result) {
+		if(err) {
+			res.send('Error');
+			throw err;
+		}
+		else {
+			res.send('Success');
+		}
+	});
 });
